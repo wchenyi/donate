@@ -1,3 +1,4 @@
+[English](readmeEN.md)
 # 简介
 | 完全使用```html```构成<br>
 参考了[idealclover](https://donate.idealclover.cn/#showqrcode)的界面UI
