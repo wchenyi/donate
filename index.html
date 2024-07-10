@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赞助小窝</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+        .thank-you {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: white;
+            font-family: SimSun, "宋体", serif;
+            opacity: 0;
+            animation: fadeInFromLeft 2s ease-in forwards;
+        }
+        @keyframes fadeInFromLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .button {
+            width: 100px;
+            height: 36px;
+            border-radius: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .button:hover {
+            transform: scale(1.05);
+        }
+        .alipay { background-color: #1677FF; }
+        .wechat { background-color: #07C160; }
+        .qq { background-color: #7A4BFE; }
+        .paypal { background-color: #0070BA; }
+        .footer {
+            color: white;
+            text-align: center;
+            width: 100%;
+            padding-top: 20px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .close {
+            align-self: flex-end;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+        }
+        .open-app {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .open-app:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .button {
+                width: 150px;
+            }
+            .modal-content {
+                margin: 5% auto;
+                width: 95%;
+            }
+            .qr-code {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- body 内容保持不变 -->
+
+    <div class="container">
+        <div class="content">
+            <img src="public/images/logo.png" alt="头像" class="avatar">
+            <div class="thank-you">🍜感谢您的喂饭🍚</div>
+            <div class="buttons">
+                <div class="button alipay" onclick="openModal('alipay')">支付宝</div>
+                <div class="button wechat" onclick="openModal('wechat')">微信</div>
+                <div class="button qq" onclick="openModal('qq')">QQ</div>
+                <a class="button paypal" href="https://www.paypal.com/paypalme/wangcy350?locale.x=zh_XC" target="_blank">PayPal</a>
+            </div>
+        </div>
+        <div class="footer">© Made by Wangcy</div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <img id="qrCode" src="/api/placeholder/200/200" alt="二维码" class="qr-code">
+            <a id="openApp" href="#" class="open-app" target="_blank">打开应用支付</a>
+        </div>
+    </div>
+
+    <script>
+        const modalData = {
+            alipay: {
+                title: "支付宝扫一扫",
+                qrCode: "public/QRcode/Alipay.jpg",
+                openUrl: "alipays://platformapi/startapp?appId=10000007&qrcode=https://qr.alipay.com/FKX15240TMKBTPVUNBW32E0"
+            },
+            wechat: {
+                title: "微信扫一扫",
+                qrCode: "public/QRcode/WeChat.jpg",
+                openUrl: "wxp://f2f0gO6SgxgNkrt3bJ9o7nAai4WEIEqbF2EpABKYuhv4e9brXNMF_izplpfeeHH-8CAK"
+            },
+            qq: {
+                title: "QQ扫一扫",
+                qrCode: "public/QRcode/QQ.jpg",
+                openUrl: "https://i.qianbao.qq.com/wallet/sqrcode.htm?m=tenpay&a=1&u=810779522&ac=CAEQgofOggMYrv-5tAY4AEIgMWExOWRlYmIyYjMxMjY0MTA0MTQ3ODhkZDlhNDk2ZDA%3D_xxx_sign&n=%E5%B1%B9%C2%A0 %C2%A0 %C2%A0&f=wallet"
+            }
+        };
+
+        function openModal(type) {
+            const modal = document.getElementById("myModal");
+            const title = document.getElementById("modalTitle");
+            const qrCode = document.getElementById("qrCode");
+            const openApp = document.getElementById("openApp");
+
+            title.textContent = modalData[type].title;
+            qrCode.src = modalData[type].qrCode;
+            openApp.href = modalData[type].openUrl;
+            openApp.textContent = `打开${type}支付`;
+
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
