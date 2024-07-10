@@ -1,6 +1,6 @@
 # Introduction
 > Completely constructed using html
-Referenced the interface UI of [idealclover]((https://donate.idealclover.cn/#showqrcode)
+Referenced the interface UI of [idealclover](https://donate.idealclover.cn/#showqrcode)
 
 ---
 # display effect
