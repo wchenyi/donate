@@ -162,18 +162,29 @@
             }
             .modal-content {
                 margin: 5% auto;
-                width: 95%;
+                width: 85%;
+                max-width: 320px;
+                padding: 15px;
             }
             .qr-code {
-                width: 180px;
-                height: 180px;
+                width: 160px;
+                height: 160px;
+            }
+            .open-app {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            .thank-you {
+                font-size: 16px;
+            }
+            .avatar {
+                width: 120px;
+                height: 120px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- body 内容保持不变 -->
-
     <div class="container">
         <div class="content">
             <img src="public/images/logo.png" alt="头像" class="avatar">
@@ -196,7 +207,6 @@
             <a id="openApp" href="#" class="open-app" target="_blank">打开应用支付</a>
         </div>
     </div>
-
     <script>
         const modalData = {
             alipay: {
