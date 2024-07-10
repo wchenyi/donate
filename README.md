@@ -4,6 +4,7 @@
 
 ---
 # 显示效果
+| 示例页面：[快来给我打钱💴，明示求打赏](https://donate.wangcy.site/)
 ### 桌面设备显示效果
 ![](public/images/pc.png)
 ### 移动设备显示效果
