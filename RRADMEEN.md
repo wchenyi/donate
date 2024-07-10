@@ -1,10 +1,10 @@
 # Introduction
-| Completely constructed using html
+> Completely constructed using html
 Referenced the interface UI of [idealclover]((https://donate.idealclover.cn/#showqrcode)
 
 ---
 # display effect
-| Sample page: [Come and give me money💴, expressly ask for rewards](https://donate.wangcy.site/)
+> Sample page: [Come and give me money💴, expressly ask for rewards](https://donate.wangcy.site/)
 
 ### Desktop device display effect
 ![](public/images/pc.png)
