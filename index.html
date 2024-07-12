@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>赞助小窝</title>
+    <!--网站图标显示方法 ↓ -->
+    <link rel="shortcut icon" href="public/images/shortcut.png">
+    <link rel="bookmark" href="public/images/shortcut.png">
+    <link rel="icon" href="public/images/shortcut.png" type="image/x-icon" />
+    <!--Safari图标显示方法 ↓ -->
+    <link rel="apple-touch-icon" href="public/images/shortcut.png">
     <style>
         body, html {
             margin: 0;
@@ -42,6 +48,15 @@
             margin-bottom: 20px;
             object-fit: cover;
         }
+	.user-name {
+	    font-size: 23px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: white;
+            font-family: SimSun, "宋体", serif;
+            opacity: 0;
+            animation: fadeInFromLeft 2s ease-in forwards;
+	}
         .thank-you {
             font-size: 18px;
             margin-bottom: 20px;
@@ -183,19 +198,14 @@
             }
         }
     </style>
-	<!--网站图标显示方法 ↓ -->
-    <link rel="shortcut icon" href="public/images/logo.png">
-    <link rel="bookmark" href="public/images/logo.png">
-    <link rel="icon" href="public/images/logo.png" type="image/x-icon" />
-    <!--Safari图标显示方法 ↓ -->
-    <link rel="apple-touch-icon" href="public/images/logo.png">
-
 </head>
 <body>
+    <!--个人信息配置-->
     <div class="container">
         <div class="content">
             <img src="public/images/logo.png" alt="头像" class="avatar">
-            <div class="thank-you">🍜感谢您的喂饭🍚</div>
+            <div class="user-name">Wangcy</div>
+	    <div class="thank-you">🍜感谢您的喂饭🍚</div>
             <div class="buttons">
                 <div class="button alipay" onclick="openModal('alipay')">支付宝</div>
                 <div class="button wechat" onclick="openModal('wechat')">微信</div>
@@ -214,6 +224,7 @@
             <a id="openApp" href="#" class="open-app" target="_blank">打开应用支付</a>
         </div>
     </div>
+    <!--支付配置-->
     <script>
         const modalData = {
             alipay: {
